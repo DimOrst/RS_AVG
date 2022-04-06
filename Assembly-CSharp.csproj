@@ -54,12 +54,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CharacterManagers\CharacterManager.cs" />
+    <Compile Include="Assets\Scripts\GridUnits\Walkable\MovingBrick.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\GridUnits\BaseClasses\Interactives.cs" />
+    <Compile Include="Assets\Scripts\PublicManagers\LayerManager.cs" />
+    <Compile Include="Assets\Scripts\GridUnits\Walkable\GlassBrickGroup.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\GridUnits\Walkable\GlassBrick.cs" />
     <Compile Include="Assets\Scripts\CharacterManagers\StateManager.cs" />
+    <Compile Include="Assets\Scripts\GridUnits\Walkable\NormalBrick.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Scripts\GridUnits\BaseClasses\Walkable.cs" />
     <Compile Include="Assets\Scripts\PublicManagers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
+    <Compile Include="Assets\Scripts\GridUnits\Walkable\FallingTrap.cs" />
+    <Compile Include="Assets\Scripts\GridUnits\Walkable\JumpBoard.cs" />
+    <Compile Include="Assets\Scripts\GridUnits\Walkable\ForcedMovingBrick.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -7,12 +7,16 @@ public class PlayerController : MonoBehaviour
     public CharacterManager CM;
 
     public string KeyInteract;
+    public string KeyLeft = "a";
+    public string KeyRight = "d";
+
     public float HorVelocityMultiplier;
     public float HorVelocityLerpSpeed;
     public float FrontVelocityLerpSpeed;
 
+    public Vector3 ThrustVelocity; // sudden additive speed
+
     Rigidbody RB;
-    Vector3 ThrustVelocity; // sudden additive speed
     float HorVelocity;
     float FrontVelocity;
 
@@ -22,12 +26,21 @@ public class PlayerController : MonoBehaviour
         RB = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         HorMove();
         FrontMove();
+    }
 
-        RB.velocity = new Vector3(HorVelocity, RB.velocity.y, FrontVelocity) + ThrustVelocity;
+    private void FixedUpdate()
+    {
+        transform.position = new Vector3(Mathf.Lerp(transform.position.x, CM.SM.PlayerAbstractPos, HorVelocityLerpSpeed), transform.position.y, transform.position.z);
+        transform.position += new Vector3(0, 0, 1) * FrontVelocity * Time.fixedDeltaTime;
+
+        //move with grid
+        //RB.velocity = new Vector3(HorVelocity,RB.velocity.y,FrontVelocity) + ThrustVelocity;
+
+        RB.velocity += ThrustVelocity;
         ThrustVelocity = Vector3.zero;
     }
 
@@ -36,7 +49,21 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void HorMove()
     {
-        HorVelocity = Mathf.Lerp(HorVelocity, Input.GetAxisRaw("Horizontal") * HorVelocityMultiplier, HorVelocityLerpSpeed);    
+        //move without grid
+        HorVelocity = Mathf.Lerp(HorVelocity, Input.GetAxisRaw("Horizontal") * HorVelocityMultiplier, HorVelocityLerpSpeed);
+
+        //move within grid
+        if (Mathf.Abs(RB.velocity.y) < 0.1f)
+        {
+            if (Input.GetKeyDown(KeyLeft))
+            {
+                CM.SM.PlayerAbstractPos -= 1;
+            }
+            if (Input.GetKeyDown(KeyRight))
+            {
+                CM.SM.PlayerAbstractPos += 1;
+            }
+        }
     }
 
     /// <summary>

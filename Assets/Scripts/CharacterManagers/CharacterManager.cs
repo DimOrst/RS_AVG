@@ -29,4 +29,14 @@ public class CharacterManager : MonoBehaviour
         LM = FindObjectOfType<LevelManager>();
         LM.CM = this;
     }
+
+    public void BurstUp(float SuddenSpeed)
+    {
+        PC.ThrustVelocity = Vector3.up * SuddenSpeed;
+    }
+
+    public void ForcedMovement(int distance)
+    {
+        SM.PlayerAbstractPos += distance;
+    }
 }
